@@ -19,12 +19,25 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Despesas pessoais"),
-      ),
-      body: const Center(
-        child: Text("Versão inicial"),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text("Despesas pessoais"),
+        ),
+        body: Column(children: const <Widget>[
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              color: Colors.black,
+              elevation: 5,
+              child: Text("Gráfico",
+               style: TextStyle(
+                color: Colors.white
+                )),
+            ),
+          ),
+          Card(
+            child: Text("Lista de transações"),
+          ),
+          
+        ]));
   }
 }
