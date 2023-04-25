@@ -15,7 +15,13 @@ class TransactionUser extends StatefulWidget {
 class _TransactionUserState extends State<TransactionUser> {
   final _transactions = [
     Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now()),
-    Transaction("t2", "Conta de luz", 110.56, DateTime.now()),
+    Transaction("t2", "Conta de luz", 6787.56, DateTime.now()),
+    Transaction("t3", "Conta 03", 3230.75, DateTime.now()),
+    Transaction("t4", "Conta 05", 1430.56, DateTime.now()),
+    Transaction("t5", "Conta 07", 150.76, DateTime.now()),
+    Transaction("t6", "Conta 08", 160.26, DateTime.now()),
+    Transaction("t7", "Conta 12", 1420.27, DateTime.now()),
+    Transaction("t8", "Conta 55", 1410.13, DateTime.now()),
   ];
 
   _addTransaction(String title, double value){
@@ -36,8 +42,8 @@ class _TransactionUserState extends State<TransactionUser> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionalList(_transactions),
-        TransactionForm(_addTransaction)
+        TransactionForm(_addTransaction),
+        TransactionalList(_transactions)
       ],
     );
   }
