@@ -6,7 +6,7 @@ class TransactionForm extends StatelessWidget {
 
   final void Function(String, double) onSubmit;
 
-  TransactionForm(this.onSubmit);
+  TransactionForm(this.onSubmit, {super.key});
 
   _submitForm(){
     final title = titleController.text;
