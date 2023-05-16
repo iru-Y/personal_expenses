@@ -1,10 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:personal_expenses/components/chart.dart';
 import 'package:personal_expenses/components/transactional_form.dart';
 import 'package:flutter/rendering.dart';
-
-
 import 'components/transactional_list.dart';
 import 'models/transaction.dart';
 
@@ -39,15 +38,18 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
 
   final List<Transaction>_transactions = [
-    // Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now()),
-    // Transaction("t2", "Conta de luz", 6787.56, DateTime.now()),
-    // Transaction("t3", "Conta 03", 3230.75, DateTime.now()),
-    // Transaction("t4", "Conta 05", 1430.56, DateTime.now()),
-    // Transaction("t5", "Conta 07", 150.76, DateTime.now()),
-    // Transaction("t6", "Conta 08", 160.26, DateTime.now()),
-    // Transaction("t7", "Conta 12", 1420.27, DateTime.now()),
-    // Transaction("t8", "Conta 55", 1410.13, DateTime.now()),
+    Transaction("t0", "Celular", 400.00, DateTime.now().subtract(const Duration(days: 33))),
+    Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now().subtract(const Duration(days: 3))),
+    Transaction("t2", "Conta de luz", 140.56, DateTime.now().subtract(const Duration(days: 5))),
   ];
+
+  List<Transaction> get _recentTransactions{
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+          const Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   _addTransaction(String title, double value){
     final newTransaction = Transaction(
@@ -86,20 +88,8 @@ class _MyHomeState extends State<MyHome> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-                // ignore: avoid_unnecessary_containers
-                const SizedBox(
-                  child: Card(
-                   color: Colors.black,
-                   elevation: 5,
-                   child: Text("Gráfico",
-                       style: TextStyle(color: Colors.white)),
-                             ),
-                ),
-        Column(
-          children: [
+            Chart(_recentTransactions),
             TransactionalList(_transactions)
-          ],
-        ),
           ],
         ),
       ),
