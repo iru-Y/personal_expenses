@@ -81,13 +81,16 @@ class _TransactionFormState extends State<TransactionForm> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
-                      onPressed: ()=> _submitForm,
-                        child: Text(
-                          "Nova transação",
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    Container(
+                      color: Colors.purple,
+                      child: TextButton(
+                      onPressed: _submitForm,
+                          child: Text(
+                            "Nova transação",
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
+                    ),
                   ],
                 )
               ],
