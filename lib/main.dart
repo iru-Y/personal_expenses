@@ -22,6 +22,9 @@ class ExpenseApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         fontFamily: "Schuyler",
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.white,
+        )
         )
       );
   }
@@ -37,11 +40,7 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
 
-  final List<Transaction>_transactions = [
-    Transaction("t0", "Celular", 400.00, DateTime.now().subtract(const Duration(days: 33))),
-    Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now().subtract(const Duration(days: 3))),
-    Transaction("t2", "Conta de luz", 140.56, DateTime.now().subtract(const Duration(days: 5))),
-  ];
+  final List<Transaction>_transactions = [];
 
   List<Transaction> get _recentTransactions{
     return _transactions.where((tr) {
@@ -51,18 +50,24 @@ class _MyHomeState extends State<MyHome> {
     }).toList();
   }
 
-  _addTransaction(String title, double value){
+  _addTransaction(String title, double value, DateTime time){
     final newTransaction = Transaction(
         Random().nextDouble().toString(),
         title,
         value,
-        DateTime.now()
+        time
     );
 
     setState(() {
       _transactions.add(newTransaction);
     });
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id){
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context){
@@ -89,7 +94,9 @@ class _MyHomeState extends State<MyHome> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionalList(_transactions)
+            Container(
+              child: TransactionalList(_transactions, _removeTransaction)
+            ),
           ],
         ),
       ),
