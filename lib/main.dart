@@ -40,7 +40,16 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
 
-  final List<Transaction>_transactions = [];
+  final List<Transaction>_transactions = [
+    Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now()),
+    Transaction("t2", "Conta de luz", 6787.56, DateTime.now()),
+    Transaction("t3", "Conta 03", 3230.75, DateTime.now()),
+    Transaction("t4", "Conta 05", 1430.56, DateTime.now()),
+    Transaction("t5", "Conta 07", 150.76, DateTime.now()),
+    Transaction("t6", "Conta 08", 160.26, DateTime.now()),
+    Transaction("t7", "Conta 12", 1420.27, DateTime.now()),
+    Transaction("t8", "Conta 55", 1410.13, DateTime.now()),
+  ];
 
   List<Transaction> get _recentTransactions{
     return _transactions.where((tr) {
