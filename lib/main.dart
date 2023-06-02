@@ -22,7 +22,7 @@ class ExpenseApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         fontFamily: "Schuyler",
-        buttonTheme: ButtonThemeData(
+        buttonTheme: const ButtonThemeData(
           buttonColor: Colors.white,
         )
         )
@@ -39,6 +39,8 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+
+ bool _showChart = false;
 
   final List<Transaction>_transactions = [
     Transaction("t1", "Novo tênis de corrida", 310.75, DateTime.now()),
@@ -102,10 +104,22 @@ class _MyHomeState extends State<MyHome> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            Container(
-              child: TransactionalList(_transactions, _removeTransaction)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Exibir gráficos"),
+                Switch(value: _showChart,
+                    onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                }),
+              ],
             ),
+            if(_showChart)
+            Chart(_recentTransactions),
+            if(!_showChart)
+            TransactionalList(_transactions, _removeTransaction),
           ],
         ),
       ),
